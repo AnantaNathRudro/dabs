@@ -1,0 +1,83 @@
+<% if (role == "handler"){ %>
+  <%- include('./partials/navbar-handler.ejs') %>
+  <title>Booked Appointments</title>
+  </head>
+  <body>
+    
+    <% let i=0 %>
+    <% if(appointments.length != 0 && appointments != null){ %>
+      <div class="p-3">
+        <% while(i<appointments.length){ %>
+          <% if(appointments[i].cancelled == false){ %>
+            <h3>Doctor: <%= appointments[i].doctor %></h3>
+            <div class="card w-25 mb-3" >
+              <h5 class="card-header  bg-secondary text-white">Patient Name: <%= appointments[i].patient %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Date: <%= new Date(appointments[i].date).toDateString() %></h5>
+                <p class="card-text">Serial: <%= appointments[i].serial %></p>
+                <a href="/appointment/cancel/<%= appointments[i]._id %>">
+                  <button class="btn btn-danger" type="submit" name="cancel">Cancel Appointment</button>
+                </a>
+              </div>
+            </div>
+          <% } else { %>
+            <h3>Doctor: <%= appointments[i].doctor %></h3>
+            <div class="card w-25 mb-3" >
+              <h5 class="card-header  bg-secondary text-white">Patient Name: <%= appointments[i].patient %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Date: <%= new Date(appointments[i].date).toDateString() %></h5>
+                <p class="card-text">Serial: <%= appointments[i].serial %></p>
+                  <button class="btn btn-danger" type="submit" name="cancel" disabled>Cancelled</button>
+              </div>
+            </div>
+          <% } %>
+          <% i++ %>
+        <% } %> 
+      </div>
+  <% } else { %>
+      <div class="no-patient m-2 p-2" style="text-align: center; background-color: coral;">
+        <h4>No appointments booked yet.</h4>
+      </div>
+  <% } %>
+<% } else if (role == "patient"){ %>
+  <%- include('./partials/navbar-patient.ejs') %>
+  <title>Booked Appointments</title>
+  </head>
+  <body>
+    
+    <% let i=0 %>
+    <% if(appointments.length != 0  && appointments != null){ %>
+      <div class="p-3">
+        <% while(i<appointments.length){ %>
+          <% if(appointments[i].cancelled == false){ %>
+            <div class="card w-25 mb-3" >
+              <h5 class="card-header  bg-secondary text-white"><%= appointments[i].doctor %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Date: <%= new Date(appointments[i].date).toDateString() %></h5>
+                <p class="card-text">Serial: <%= appointments[i].serial %></p>
+                <p class="card-text">Token: <%= appointments[i].token %></p>
+                <a href="/appointment/cancel/<%= appointments[i]._id %>">
+                  <button class="btn btn-danger" type="submit" name="cancel">Cancel Appointment</button>
+                </a>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="card w-25 mb-3" >
+              <h5 class="card-header  bg-secondary text-white"><%= appointments[i].doctor %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Date: <%= new Date(appointments[i].date).toDateString() %></h5>
+                <p class="card-text">Serial: <%= appointments[i].serial %></p>
+                <p class="card-text">Token: <%= appointments[i].token %></p>
+                  <button class="btn btn-danger" type="submit" name="cancel" disabled>Cancelled</button>
+              </div>
+            </div>
+          <% } %>
+          <% i++ %>
+        <% } %> 
+      </div>
+  <% } else { %>
+      <div class="no-patient m-2 p-2" style="text-align: center; background-color: coral;">
+        <h4>No appointments booked yet.</h4>
+      </div>
+  <% } %>
+<% } %>

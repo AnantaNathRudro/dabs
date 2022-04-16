@@ -1,0 +1,34 @@
+<% if(role=="patient"){ %>
+<!-- If the user is an patient -->
+<%- include('./partials/navbar-patient.ejs') %>
+<title>Home</title>
+</head>
+<body>
+    <div class="home container m-auto">
+        <h4>Welcome to DABS</h4>
+        <h6>You can search for doctors by navigating to the "View Doctors" page on the navigationbar or click <a href="/doctor">here</a>.</h6>
+    </div>
+ 
+<% } else if(role=="handler"){ %>
+<!-- If the user is a handler -->
+<%- include('./partials/navbar-handler.ejs') %>
+<title>Home</title>
+</head>
+<body>
+    <div class="home container m-auto">
+        <h4>Welcome to the Handler's Homepage</h4>
+          
+    </div>
+    
+<% } else{ %>
+<!-- If the user is an admin -->
+<%- include('./partials/navbar-admin.ejs') %>
+<title>Home</title>
+</head>
+<body>
+    <div class="home container m-auto">
+        <h4>Welcome to the Admin's Homepage</h4>
+        
+    </div>
+<% } %>  
+<!-- The footer will be render regardless of user-type -->

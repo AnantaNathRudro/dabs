@@ -1,0 +1,119 @@
+<% if (role == "handler"){ %>
+  <%- include('./partials/navbar-handler.ejs') %>
+<title>Appointment</title>
+</head>
+<body>
+  <div class="col-4">
+    <div class="doctor-form m-auto" style="width: fit-content;">
+      <h5>Add a doctor:</h5>
+      <form class="form-control" action="/doctor/manage" method="POST">
+          <label for="name">Name:</label>
+          <input class="form-control" type="text" id="name" name="name" required>
+          
+          <label for="username">Username:</label>
+          <input class="form-control" type="text" id="username" name="username" required>
+          
+          <label for="department">Department:</label>
+          <input class="form-control" type="text" id="department" name="department" required>
+
+          <label for="degree">Degree:</label>
+          <input class="form-control" type="text" id="degree" name="degree" required>
+
+          <label for="workplace">Workplace:</label>
+          <input class="form-control" type="text" id="workplace" name="workplace" required>
+
+          <label for="handler">Handler:</label>
+          <input class="form-control" type="text" id="handler" name="handler" required>
+          
+          <label for="handlerPass">Handler Password:</label>
+          <input class="form-control" type="text" id="handlerPass" name="handlerPass" required>
+          
+          <label for="schedule">Schedule:</label>
+          <input class="form-control" type="text" id="schedule" name="schedule" required>
+          
+          <button class="btn btn-success" type="submit">Add Doctor</button>
+      </form>
+  </div>
+    <% if(doctor != {} && doctor != null){ %>
+        <div class="container doctor m-auto">
+          <table class="table table-info table-bordered" style="width: fit-content;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Department</th>
+                <th scope="col">Degree</th>
+                <th scope="col">Workplace</th>
+                <th scope="col">Handler</th>
+                <th scope="col">Handler Pass</th>
+                <th scope="col">Schedule</th>
+                <th scope="col">Remove?</th>
+              </tr>
+            </thead>
+            <% let i=0 %>
+            <tbody>
+              <% while(i<doctor.length){ %>
+                  <tr>
+                    <th scope="row"><%= i %></th>
+                    <td><%= doctor[i].name %></td>
+                    <td><%= doctor[i].username %></td>
+                    <td><%= doctor[i].department %></td>
+                    <td><%= doctor[i].degree %></td>
+                    <td><%= doctor[i].workplace %></td>
+                    <td><%= doctor[i].handler %></td>
+                    <td><%= doctor[i].handlerPass %></td>
+                    <td><%= doctor[i].schedule %></td>
+                    <td><a href="/doctor/manage/delete/<%= doctor[i].username %>"><i class="bi bi-trash-fill"></i></a></td>
+                  </tr> 
+                  <% i++ %>
+              <% } %> 
+            </tbody>
+        </table>
+        </div>
+    <% } else { %>
+        <div class="no-patient m-2 p-2" style="text-align: center; background-color: coral;">
+          <h4>No doctors added yet.</h4>
+        </div>
+    <% } %>
+<% } else if (role == "patient"){ %>
+  <%- include('./partials/navbar-patient.ejs') %>
+  <title>Appointment</title>
+  </head>
+  <body>
+      <% let i=0 %>
+      <% if(doctor != {} && doctor != null){ %>
+        <div class="p-3">
+            <div class="card w-25 mb-3" >
+              <h5 class="card-header  bg-secondary text-white"><%= doctor.name %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Available: 
+                  <% if(doctor.availability == true){ %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="green" width="16" height="16" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" r="8"/>
+                    </svg>
+                    <form action="/appointment/<%= doctor.username  %>" method="post">
+                      <input type="date" name="date" id="date">
+                      <button class="btn btn-primary" type="submit">Confirm Appointment</button>
+                    </form>
+                  <% } else { %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="red" width="16" height="16" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" r="8"/>
+                    </svg>
+                    <form action="/appointment/<%= doctor.username  %>" method="post">
+                      <input type="date" name="date" id="date" disabled>
+                      <button class="btn btn-primary" type="submit" disabled>Confirm Appointment</button>
+                    </form>
+                  <% } %>
+                </h5>
+              </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="no-patient m-2 p-2" style="text-align: center; background-color: coral;">
+          <h4>No doctors added yet.</h4>
+        </div>
+    <% } %>
+<% } %>
+
+

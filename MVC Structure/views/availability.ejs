@@ -1,0 +1,49 @@
+<%- include('./partials/navbar-handler.ejs') %>
+<title>Doctor's Availability</title>
+</head>
+<body>
+  
+        <div class="container doctor m-auto">
+          <table class="table table-info table-bordered" style="width: fit-content;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Doctor Availability</th>
+                
+              </tr>
+            </thead>
+            
+            <tbody>
+                  <tr>
+                    <th scope="row"><%= i=1 %></th>
+                    <td><%= doctorName %></td>
+                    <td><%= doctorAvailability==true? "Available" : "Not Available" %></td>
+                   
+                    
+                  </tr> 
+                  <% i++ %>
+             
+            </tbody>
+        </table>
+        <div>
+          <h3>Change Availability:</h3>
+          <form action="/availability" method="post">
+            <% if(doctorAvailability == true){ %>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="availability" name="availability" checked>
+                <label class="form-check-label" for="availability">Availability</label>
+              </div>
+              <button class="btn btn-success" type="submit">Confirm</button>
+            <% } else { %>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="availability" name="availability">
+                <label class="form-check-label" for="availability">Availability</label>
+              </div>
+              <button class="btn btn-success" type="submit">Confirm</button>
+            <% } %>
+            
+          </form>
+        </div>
+        </div>
+    

@@ -1,0 +1,23 @@
+body {
+	background-color: rgb(35, 200, 215);
+}
+
+#loginText {
+	color: rgb(43, 110, 226);
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	padding: 170px;
+}
+
+#credentials {
+	background-color: rgba(235, 54, 22, 0.221);
+	text-align: center;
+	height: fit-content;
+	width: fit-content;
+	margin: auto;
+	padding: 20px;
+	border-radius: 30px;
+}

@@ -1,0 +1,31 @@
+{
+	"name": "dabs",
+	"version": "1.0.0",
+	"description": "will manage appointments",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+		"dev": "nodemon app.js",
+		"test": "jest"
+	},
+	"author": "ananta",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"bootstrap-icons": "^1.7.0",
+		"connect-flash": "^0.1.1",
+		"connect-mongodb-session": "^3.1.1",
+		"dotenv": "^10.0.0",
+		"ejs": "^3.1.6",
+		"express": "^4.17.3",
+		"express-session": "^1.17.2",
+		"mongoose": "^6.0.12",
+		"morgan": "^1.10.0",
+		"sernam": "^1.0.1",
+		"shortid": "^2.2.16"
+	},
+	"devDependencies": {
+		"@babel/plugin-transform-modules-commonjs": "^7.17.7",
+		"jest": "^27.4.4"
+	}
+}

@@ -1,0 +1,114 @@
+<% if (role == "admin"){ %>
+  <%- include('./partials/navbar-admin.ejs') %>
+<title>Doctors</title>
+</head>
+<body>
+  <div class="col-4">
+    <div class="doctor-form m-auto" style="width: fit-content;">
+      <h5>Add a doctor:</h5>
+      <form class="form-control" action="/doctor/manage" method="POST">
+          <label for="name">Name:</label>
+          <input class="form-control" type="text" id="name" name="name" required>
+          
+          <label for="username">Username:</label>
+          <input class="form-control" type="text" id="username" name="username" required>
+          
+          <label for="department">Department:</label>
+          <input class="form-control" type="text" id="department" name="department" required>
+
+          <label for="degree">Degree:</label>
+          <input class="form-control" type="text" id="degree" name="degree" required>
+
+          <label for="workplace">Workplace:</label>
+          <input class="form-control" type="text" id="workplace" name="workplace" required>
+
+          <label for="handler">Handler:</label>
+          <input class="form-control" type="text" id="handler" name="handler" required>
+          
+          <label for="handlerPass">Handler Password:</label>
+          <input class="form-control" type="text" id="handlerPass" name="handlerPass" required>
+          
+          <label for="schedule">Schedule:</label>
+          <input class="form-control" type="text" id="schedule" name="schedule" required>
+          
+          <button class="btn btn-success" type="submit">Add Doctor</button>
+      </form>
+  </div>
+    <% if(details.length != 0 && details != null){ %>
+        <div class="container doctor m-auto">
+          <table class="table table-info table-bordered" style="width: fit-content;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Department</th>
+                <th scope="col">Degree</th>
+                <th scope="col">Workplace</th>
+                <th scope="col">Handler</th>
+                <th scope="col">Handler Pass</th>
+                <th scope="col">Schedule</th>
+                <th scope="col">Remove?</th>
+              </tr>
+            </thead>
+            <% let i=0 %>
+            <tbody>
+              <% while(i<details.length){ %>
+                  <tr>
+                    <th scope="row"><%= i %></th>
+                    <td><%= details[i].name %></td>
+                    <td><%= details[i].username %></td>
+                    <td><%= details[i].department %></td>
+                    <td><%= details[i].degree %></td>
+                    <td><%= details[i].workplace %></td>
+                    <td><%= details[i].handler %></td>
+                    <td><%= details[i].handlerPass %></td>
+                    <td><%= details[i].schedule %></td>
+                    <td><a href="/doctor/manage/delete/<%= details[i].username %>"><i class="bi bi-trash-fill"></i></a></td>
+                  </tr> 
+                  <% i++ %>
+              <% } %> 
+            </tbody>
+        </table>
+        </div>
+    <% } else { %>
+        <div class="no-patient m-2 p-2" style="text-align: center; background-color: coral;">
+          <h4>No doctors added yet.</h4>
+        </div>
+    <% } %>
+<% } else if (role == "patient"){ %>
+  <%- include('./partials/navbar-patient.ejs') %>
+  <title>Doctors</title>
+  </head>
+  <body>
+      <div class="w-50 p-3">
+        <form class="d-flex mb-3" action="/doctor" method="post" id="search">
+          <input class="form-control me-2" type="search" name="search" placeholder="Search Doctors" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+      <% let i=0 %>
+      <% if(details.length != 0 && details != null){ %>
+        <div class="p-3">
+          <% while(i<details.length){ %>
+            <div class="card w-25 mb-3" >
+              <h5 class="card-header  bg-secondary text-white"><%= details[i].name %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Dept.: <%= details[i].department %></h5>
+                <p class="card-text">Degree: <%= details[i].degree %></p>
+                <p class="card-text">Workplace: <%= details[i].workplace %></p>
+                <p class="card-text">Schedule: <%= details[i].schedule %></p>
+                <a href="appointment/<%= details[i].username  %>" class="btn btn-primary">Book Appointment</a>
+              </div>
+            </div>
+            <% i++ %>
+          <% } %> 
+        </div>
+    <% } else { %>
+        <div class="no-patient m-2 p-2" style="text-align: center; background-color: coral;">
+          <h4>No doctors found.</h4>
+        </div>
+    <% } %>
+<% } %>
+
+
