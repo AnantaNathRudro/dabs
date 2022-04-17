@@ -13,6 +13,7 @@
 - patient can see the appointment details
 - patient can cancel the appointment
 - admin can add or remove doctors to the list
+- at the time of doctors adding, handler login credential will be provided.with this handler will be able to login to the system
 - handler can manage appointment
 - handler can cancel the appointment
 - handler can verify the appointment with token from the database
