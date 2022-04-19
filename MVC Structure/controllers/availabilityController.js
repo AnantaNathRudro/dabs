@@ -21,7 +21,9 @@ const updateAvailability = async (req, res) => {
 	try {
 		const availability = req.body.availability == "on" ? true : false
 		await Doctor.updateOne(
-			{},
+			{
+				handler: req.session.username,
+			},
 			{
 				availability: availability,
 			}
