@@ -2,6 +2,7 @@
 
 ## Doctor Appointment Booking System
 
+##Used Nodejs,EJS,ExpressJs,MongoDB,CSS,Bootstrap
 ## **features are:**
 
 - User can signup
